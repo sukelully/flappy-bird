@@ -13,6 +13,8 @@
 		A39FDBF02AD45FA3000452E2 /* libsfml-graphics.2.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39FDBEB2AD45FA3000452E2 /* libsfml-graphics.2.6.0.dylib */; };
 		A39FDBF12AD45FA3000452E2 /* libsfml-window.2.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39FDBEC2AD45FA3000452E2 /* libsfml-window.2.6.0.dylib */; };
 		A39FDBF22AD45FA3000452E2 /* libsfml-network.2.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39FDBED2AD45FA3000452E2 /* libsfml-network.2.6.0.dylib */; };
+		A39FDBF52AD46160000452E2 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39FDBF32AD46160000452E2 /* Game.cpp */; };
+		A39FDBF82AD467A3000452E2 /* Bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39FDBF62AD467A3000452E2 /* Bird.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +38,10 @@
 		A39FDBEB2AD45FA3000452E2 /* libsfml-graphics.2.6.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-graphics.2.6.0.dylib"; path = "lib/SFML/lib/libsfml-graphics.2.6.0.dylib"; sourceTree = "<group>"; };
 		A39FDBEC2AD45FA3000452E2 /* libsfml-window.2.6.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.6.0.dylib"; path = "lib/SFML/lib/libsfml-window.2.6.0.dylib"; sourceTree = "<group>"; };
 		A39FDBED2AD45FA3000452E2 /* libsfml-network.2.6.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.6.0.dylib"; path = "lib/SFML/lib/libsfml-network.2.6.0.dylib"; sourceTree = "<group>"; };
+		A39FDBF32AD46160000452E2 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		A39FDBF42AD46160000452E2 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		A39FDBF62AD467A3000452E2 /* Bird.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
+		A39FDBF72AD467A3000452E2 /* Bird.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bird.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				A39FDBDE2AD45CA7000452E2 /* main.cpp */,
+				A39FDBF32AD46160000452E2 /* Game.cpp */,
+				A39FDBF42AD46160000452E2 /* Game.hpp */,
+				A39FDBF62AD467A3000452E2 /* Bird.cpp */,
+				A39FDBF72AD467A3000452E2 /* Bird.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -157,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A39FDBF82AD467A3000452E2 /* Bird.cpp in Sources */,
 				A39FDBDF2AD45CA7000452E2 /* main.cpp in Sources */,
+				A39FDBF52AD46160000452E2 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

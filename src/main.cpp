@@ -1,9 +1,21 @@
 #include <iostream>
-#include "SFML/Graphics.hpp"
+#include "Game.hpp"
 
-
-int main(int argc, const char * argv[]) {
-    sf::RenderWindow window (sf::VideoMode(800, 600), "Flappy Bird");
+int main() {
+    // Init srand.
+    std::srand(static_cast<unsigned>(time(NULL)));
+    
+    // Init game engine.
+    Game game;
+    
+    // Game loop.
+    while (game.isRunning()) {
+        // Update game.
+        game.update();
+        
+        // Render.
+        game.render();
+    }
     
     return 0;
 }
