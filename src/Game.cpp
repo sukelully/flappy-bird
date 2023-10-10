@@ -21,6 +21,7 @@ void Game::initWindow() {
 Game::Game() {
     this->initVariables();
     bird.initBird();
+    wall.drawWall();
     this->initWindow();
 }
 
@@ -54,6 +55,7 @@ void Game::update() {
 //    this->getMousePosition();
 //    this->updateMousePositions();
     bird.update();
+    wall.update();
 }
 
 void Game::render() {
@@ -61,6 +63,8 @@ void Game::render() {
     
     // Draw game objects.
     this->window->draw(bird);
+    this->window->draw(wall.top);
+    this->window->draw(wall.bottom);
     this->window->display();
 }
 

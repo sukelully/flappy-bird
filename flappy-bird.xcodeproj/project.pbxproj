@@ -15,6 +15,7 @@
 		A39FDBF22AD45FA3000452E2 /* libsfml-network.2.6.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A39FDBED2AD45FA3000452E2 /* libsfml-network.2.6.0.dylib */; };
 		A39FDBF52AD46160000452E2 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39FDBF32AD46160000452E2 /* Game.cpp */; };
 		A39FDBF82AD467A3000452E2 /* Bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39FDBF62AD467A3000452E2 /* Bird.cpp */; };
+		A3A9CB552AD4DCB300031AE6 /* Wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3A9CB532AD4DCB300031AE6 /* Wall.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,8 @@
 		A39FDBF42AD46160000452E2 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		A39FDBF62AD467A3000452E2 /* Bird.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
 		A39FDBF72AD467A3000452E2 /* Bird.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bird.hpp; sourceTree = "<group>"; };
+		A3A9CB532AD4DCB300031AE6 /* Wall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
+		A3A9CB542AD4DCB300031AE6 /* Wall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				A39FDBF42AD46160000452E2 /* Game.hpp */,
 				A39FDBF62AD467A3000452E2 /* Bird.cpp */,
 				A39FDBF72AD467A3000452E2 /* Bird.hpp */,
+				A3A9CB532AD4DCB300031AE6 /* Wall.cpp */,
+				A3A9CB542AD4DCB300031AE6 /* Wall.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A39FDBF82AD467A3000452E2 /* Bird.cpp in Sources */,
+				A3A9CB552AD4DCB300031AE6 /* Wall.cpp in Sources */,
 				A39FDBDF2AD45CA7000452E2 /* main.cpp in Sources */,
 				A39FDBF52AD46160000452E2 /* Game.cpp in Sources */,
 			);

@@ -16,6 +16,7 @@ void Bird::initBird() {
 
 void Bird::update() {
     this->move(vel);
+    
     vel.y += 1;
     
     if (vel.y >= 10) {

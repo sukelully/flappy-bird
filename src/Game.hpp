@@ -10,6 +10,7 @@
 #include <SFML/Window.hpp>
 
 #include "Bird.hpp"
+#include "Wall.hpp"
     
 class Game {
     // Window.
@@ -19,6 +20,7 @@ class Game {
     
     // Bird.
     Bird bird;
+    Wall wall;
     
     // Mouse positions.
     sf::Vector2i mousePosWindow;
