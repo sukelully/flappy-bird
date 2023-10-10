@@ -38,6 +38,8 @@ void Game::pollEvents() {
             case sf::Event::KeyPressed:
                 if (this->event.key.code == sf::Keyboard::Escape)
                     this->window->close();
+                if (this->event.key.code == sf::Keyboard::Space)
+                    bird.jump();
                 break;
         }
     }
@@ -49,8 +51,9 @@ const bool Game::isRunning() const {
 
 void Game::update() {
     this->pollEvents();
-    this->getMousePosition();
-    this->updateMousePositions();
+//    this->getMousePosition();
+//    this->updateMousePositions();
+    bird.update();
 }
 
 void Game::render() {
