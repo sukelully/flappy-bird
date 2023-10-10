@@ -18,9 +18,10 @@ class Game {
     sf::VideoMode videoMode;
     sf::Event event;
     
-    // Bird.
+    // Game objects.
     Bird bird;
     Wall wall;
+    std::vector<Wall> walls;
     
     // Mouse positions.
     sf::Vector2i mousePosWindow;
@@ -43,6 +44,9 @@ public:
     void pollEvents();
     void update();
     void render();
+    void renderWalls();
+    void createWall();
+    void updateWalls();
     void updateMousePositions();
 };
 

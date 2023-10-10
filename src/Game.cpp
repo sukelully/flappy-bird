@@ -21,7 +21,7 @@ void Game::initWindow() {
 Game::Game() {
     this->initVariables();
     bird.initBird();
-    wall.drawWall();
+//    wall.initWall();
     this->initWindow();
 }
 
@@ -55,7 +55,33 @@ void Game::update() {
 //    this->getMousePosition();
 //    this->updateMousePositions();
     bird.update();
-    wall.update();
+//    wall.update();
+    this->updateWalls();
+}
+
+void Game::createWall() {
+    wall.initWall();
+    
+    this->walls.push_back(this->wall);
+}
+
+void Game::updateWalls() {
+    std::cout << this->wall.top.getPosition().x << std::endl;
+    if (this->wall.top.getPosition().x < 500) {
+        this->createWall();
+    }
+    
+    for (int i = 0; i < this->walls.size(); i++) {
+        bool deleted = false;
+        this->walls[i].top.move(-2.f, 0.f);
+        this->walls[i].bottom.move(-2.f, 0.f);
+        
+        if (this->walls[i].top.getPosition().x > this->window->getSize().x) {
+            deleted = true;
+        }
+        
+        if (deleted) this->walls.erase(this->walls.begin() + i);
+    }
 }
 
 void Game::render() {
@@ -63,9 +89,18 @@ void Game::render() {
     
     // Draw game objects.
     this->window->draw(bird);
-    this->window->draw(wall.top);
-    this->window->draw(wall.bottom);
+//    this->window->draw(wall.top);
+//    this->window->draw(wall.bottom);
+//    this->window->draw(wall);
+    this->renderWalls();
     this->window->display();
+}
+
+void Game::renderWalls() {
+    for (auto &w : this->walls) {
+        this->window->draw(w.top);
+        this->window->draw(w.bottom);
+    }
 }
 
 void Game::getMousePosition() {

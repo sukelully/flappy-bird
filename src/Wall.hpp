@@ -8,15 +8,16 @@
 #include <SFML/Window.hpp>
 
 class Wall {
+    float topSize;
+    float bottomSize;
     
 public:
     sf::RectangleShape top;
     sf::RectangleShape bottom;
     
     Wall();
-    void initWall(int x, int y);
-    void drawWall();
-    void update();
+    void initWall();
+//    void update();
 };
 
 #endif

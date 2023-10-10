@@ -7,22 +7,19 @@ Wall::Wall() {
     
 }
 
-void Wall::drawWall() {
-    top.setSize(sf::Vector2f(10, 250));
+void Wall::initWall() {
+    topSize = static_cast<float>( rand() % static_cast<int>(400 - 100 + 1) + 100);
+    bottomSize = (win_height - topSize - 200) * -1;
+    
+    top.setSize(sf::Vector2f(10, topSize));
     top.setPosition(win_width, 0);
     top.setFillColor(sf::Color::Red);
-    bottom.setSize(sf::Vector2f(10, -250));
+    bottom.setSize(sf::Vector2f(10, bottomSize));
     bottom.setPosition(win_width, win_height);
     bottom.setFillColor(sf::Color::Red);
 }
 
-//void Wall::initWall(int x, int y) {
-//    wall.setPosition(x, y);
-//    wall.setSize(sf::Vector2f(10, 200));
-//    wall.setFillColor(sf::Color::Red);
+//void Wall::update() {
+//    top.move(-2, 0);
+//    bottom.move(-2, 0);
 //}
-
-void Wall::update() {
-    top.move(-1, 0);
-    bottom.move(-1, 0);
-}
