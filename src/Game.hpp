@@ -22,14 +22,23 @@ class Game {
     Bird bird;
     Wall wall;
     std::vector<Wall> walls;
+    sf::Text score;
     
-    // Mouse positions.
-    sf::Vector2i mousePosWindow;
-    sf::Vector2f mousePosView;
+    // Game logic.
+    bool isOver;
 
     // Private functions.
     void initVariables();
     void initWindow();
+    void initScore();
+    void updateScore();
+    void renderWalls();
+    void createWall();
+    void updateWalls();
+    void updateBird();
+    void gameOver();
+    void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);
+    void pollEvents();
     
 public:
     // Constructors.
@@ -38,19 +47,10 @@ public:
     
     // Accessors.
     const bool isRunning() const;
-    bool isOver;
-    
     
     // Functions.
-    void pollEvents();
     void update();
     void render();
-    void renderWalls();
-    void createWall();
-    void updateWalls();
-    void updateBird();
-    void gameOver();
-    void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);
 };
 
 #endif
