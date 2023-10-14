@@ -2,6 +2,17 @@
 
 const int win_width = 800;
 const int win_height = 600;
+int wallCounter = 0;
+
+/*
+ To do:
+ - Randomise wall hole size.
+ - Gradual wall speed increase.
+ - Score system.
+ - Object intersection.
+ - Clean up / comment.
+ - Put private/public functions in the correct place.
+ */
 
 
 void Game::initVariables() { 
@@ -21,7 +32,7 @@ void Game::initWindow() {
 Game::Game() {
     this->initVariables();
     bird.initBird();
-//    wall.initWall();
+    this->createWall();
     this->initWindow();
 }
 
@@ -50,12 +61,15 @@ const bool Game::isRunning() const {
     return this->window->isOpen();
 }
 
+void Game::collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom) {
+    if (bird.getGlobalBounds().intersects(top.getGlobalBounds()) || bird.getGlobalBounds().intersects(bottom.getGlobalBounds())) {
+        std::cout << "Collision" << std::endl;
+    }
+}
+
 void Game::update() {
     this->pollEvents();
-//    this->getMousePosition();
-//    this->updateMousePositions();
-    bird.update();
-//    wall.update();
+    this->updateBird();
     this->updateWalls();
 }
 
@@ -65,22 +79,36 @@ void Game::createWall() {
     this->walls.push_back(this->wall);
 }
 
-void Game::updateWalls() {
-    std::cout << this->wall.top.getPosition().x << std::endl;
-    if (this->wall.top.getPosition().x < 500) {
-        this->createWall();
+void Game::updateBird() {
+    if (this->bird.getPosition().y > this->window->getSize().y) {
+        this->gameOver();
     }
-    
+    bird.update();
+}
+
+void Game::gameOver() {
+    std::cout << "You're out!" << std::endl;
+}
+
+// Move and create walls. Detect collisions with birds.
+void Game::updateWalls() {
     for (int i = 0; i < this->walls.size(); i++) {
-        bool deleted = false;
+        
+        // Create new wall when previous reaches x = 500.
+        if (this->walls[wallCounter].top.getPosition().x < 500) {
+            this->createWall();
+            std::cout << "Create wall" << std::endl;
+            wallCounter += 1;
+        }
+        
+        // Move walls right to left.
         this->walls[i].top.move(-2.f, 0.f);
         this->walls[i].bottom.move(-2.f, 0.f);
         
+        // Delete off-screen walls from memory.
         if (this->walls[i].top.getPosition().x > this->window->getSize().x) {
-            deleted = true;
+            this->walls.erase(this->walls.begin() + i);
         }
-        
-        if (deleted) this->walls.erase(this->walls.begin() + i);
     }
 }
 
@@ -89,9 +117,6 @@ void Game::render() {
     
     // Draw game objects.
     this->window->draw(bird);
-//    this->window->draw(wall.top);
-//    this->window->draw(wall.bottom);
-//    this->window->draw(wall);
     this->renderWalls();
     this->window->display();
 }
@@ -101,16 +126,4 @@ void Game::renderWalls() {
         this->window->draw(w.top);
         this->window->draw(w.bottom);
     }
-}
-
-void Game::getMousePosition() {
-    // Mouse position relative to window.
-    std::cout << "Mouse pos: "
-    << sf::Mouse::getPosition(*this->window).x << ", "
-    << sf::Mouse::getPosition(*this->window).y << std::endl;;
-}
-
-void Game::updateMousePositions() {
-    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
 }

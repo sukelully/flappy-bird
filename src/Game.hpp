@@ -30,7 +30,6 @@ class Game {
     // Private functions.
     void initVariables();
     void initWindow();
-    void getMousePosition();
     
 public:
     // Constructors.
@@ -47,7 +46,9 @@ public:
     void renderWalls();
     void createWall();
     void updateWalls();
-    void updateMousePositions();
+    void updateBird();
+    void gameOver();
+    void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);
 };
 
 #endif
