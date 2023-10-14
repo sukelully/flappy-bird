@@ -3,6 +3,7 @@
 const int win_width = 800;
 const int win_height = 600;
 int wallCounter = 0;
+int startButton = 0;
 float wallSpeed = -2;
 
 /*
@@ -19,8 +20,7 @@ float wallSpeed = -2;
 Game::Game() {
     this->initVariables();
     this->initScore();
-    bird.initBird();
-    this->createWall();
+    this->initStartScreen();
     this->initWindow();
 }
 
@@ -52,10 +52,18 @@ void Game::pollEvents() {
                 this->window->close();
                 break;
             case sf::Event::KeyPressed:
+                // Close game if Escape key is pressed.
                 if (this->event.key.code == sf::Keyboard::Escape)
                     this->window->close();
                 if (this->event.key.code == sf::Keyboard::Space)
-                    bird.jump();
+                    // Spacebar causes bired to jump if game has started.
+                    if (startButton != 0) {
+                        bird.jump();
+                    // If the game has not started the spacebar starts the game.
+                    } else if (startButton == 0) {
+                        initGame();
+                        startButton++;
+                    }
                 break;
         }
     }
@@ -79,6 +87,7 @@ void Game::render() {
     this->window->draw(bird);
     this->window->draw(score);
     this->renderWalls();
+    this->window->draw(startTile);
     this->window->display();
 }
 
@@ -101,8 +110,16 @@ void Game::initScore() {
 //    score.setFont(font);
 }
 
-void initStartScreen() {
-    
+void Game::initGame() {
+    bird.initBird();
+    this->createWall();
+    startTile.setFillColor(sf::Color::Transparent);
+}
+
+void Game::initStartScreen() {
+    startTile.setPosition(100, 100);
+    startTile.setSize(sf::Vector2f(600, 400));
+    startTile.setFillColor(sf::Color(66, 135, 245));
 }
 
 // Create a wall section and add it to the walls vector.

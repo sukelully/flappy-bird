@@ -5,7 +5,7 @@ const int win_height = 600;
 
 // Initialises bird size, color and position.
 void Bird::initBird() {
-    this->setPosition(win_width/2, win_height/2);
+    this->setPosition(win_width/2, 100);
     this->setRadius(10);
     this->setFillColor(sf::Color(247, 207, 96));
 }

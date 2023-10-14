@@ -23,20 +23,29 @@ class Game {
     Wall wall;
     std::vector<Wall> walls;
     sf::Text score;
+    sf::RectangleShape startTile;
     
-    // Game logic.
+    // Game logic variables.
     bool isOver;
 
-    // Private functions.
+    // Initialisation.
     void initVariables();
     void initWindow();
     void initScore();
+    void initStartScreen();
+    void initGame();
+    
+    // Updating.
     void updateScore();
-    void renderWalls();
-    void createWall();
     void updateWalls();
     void updateBird();
+    
+    // Rendering.
+    void renderWalls();
+    void createWall();
     void gameOver();
+    
+    // Game logic function.
     void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);
     void pollEvents();
     
