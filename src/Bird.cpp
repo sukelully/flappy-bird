@@ -20,7 +20,7 @@ void Bird::update() {
     }
 }
 
-// Bird "jumps" by adding an upwards velocity of 13 when spacebar is pressed.
+// Bird jumps a small distance vertically up when spacebar is pressed.
 void Bird::jump() {
     vel.y = -13;
 }

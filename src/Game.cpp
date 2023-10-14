@@ -9,11 +9,10 @@ float wallSpeed = -2;
 /*
  To do:
  - Randomise wall hole size.
- - Gradual wall speed increase.
  - Score system.
- - Press spacebar to begin.
+ - Fix start screen "You're out!" bug.
  - Clean up / comment.
- - Put private/public functions in the correct place.
+ - Add sprites, spruce up color scheme.
  */
 
 // Constructor. Initalise variables and game objects, create initial wall.
@@ -69,7 +68,7 @@ void Game::pollEvents() {
     }
 }
 
-// Update game objects if isOver is false.
+// Update game objects if "isOver" is false.
 void Game::update() {
     this->pollEvents();
     
@@ -85,10 +84,11 @@ void Game::render() {
     this->window->clear(sf::Color(105, 161, 250));
     
     // Draw game objects.
+    this->window->draw(startTile);
+    this->window->draw(startMessage);
     this->window->draw(bird);
     this->window->draw(score);
     this->renderWalls();
-    this->window->draw(startTile);
     this->window->display();
 }
 
@@ -106,9 +106,10 @@ void Game::collision(sf::CircleShape bird, sf::RectangleShape top, sf::Rectangle
 
 // Initialise score.
 void Game::initScore() {
+    score.setFont(font);
     score.setFillColor(sf::Color::White);
+    score.setString("test");
     score.setCharacterSize(30);
-//    score.setFont(font);
 }
 
 // Initialises bird and first wall, removes start menu.
@@ -116,13 +117,27 @@ void Game::initGame() {
     bird.initBird();
     this->createWall();
     startTile.setFillColor(sf::Color::Transparent);
+    startMessage.setFillColor(sf::Color::Transparent);
 }
 
-// Creates start screen to ready player.
+// Create start screen message to ensure player is ready.
 void Game::initStartScreen() {
+    // Load font.
+    if (!font.loadFromFile("media/font.ttf")) {
+        std::cout << "Error loading font" << std::endl;
+    }
+    
+    // Initialise background tile.
     startTile.setPosition(100, 100);
     startTile.setSize(sf::Vector2f(600, 400));
     startTile.setFillColor(sf::Color(66, 135, 245));
+    
+    // Initialise start screen message.
+    startMessage.setFont(font);
+    startMessage.setFillColor(sf::Color::White);
+    startMessage.setString("Press spacebar to play");
+    startMessage.setCharacterSize(40);
+    startMessage.setPosition(150, 275);
 }
 
 // Create a wall section and add it to the walls vector.
@@ -145,11 +160,12 @@ void Game::gameOver() {
     isOver = true;
 }
 
+// Update score text.
 void Game::updateScore() {
     std::cout << "Score = " << wallCounter << std::endl;
 }
 
-// Move and create walls. Detect collisions with birds. Update score.
+// Spawn new walls and move them. Detect collisions with birds. Update score.
 void Game::updateWalls() {
     for (int i = 0; i < this->walls.size(); i++) {
         

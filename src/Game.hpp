@@ -23,7 +23,9 @@ class Game {
     Wall wall;
     std::vector<Wall> walls;
     sf::Text score;
+    sf::Font font;
     sf::RectangleShape startTile;
+    sf::Text startMessage;
     
     // Game logic variables.
     bool isOver;

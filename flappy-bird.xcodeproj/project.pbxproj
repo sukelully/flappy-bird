@@ -43,6 +43,8 @@
 		A39FDBF42AD46160000452E2 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		A39FDBF62AD467A3000452E2 /* Bird.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bird.cpp; sourceTree = "<group>"; };
 		A39FDBF72AD467A3000452E2 /* Bird.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bird.hpp; sourceTree = "<group>"; };
+		A3A542462ADAF56000FCDE68 /* bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird.png; sourceTree = "<group>"; };
+		A3A5424A2ADAF8CD00FCDE68 /* font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = font.ttf; sourceTree = "<group>"; };
 		A3A9CB532AD4DCB300031AE6 /* Wall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Wall.cpp; sourceTree = "<group>"; };
 		A3A9CB542AD4DCB300031AE6 /* Wall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +68,7 @@
 		A39FDBD22AD45CA7000452E2 = {
 			isa = PBXGroup;
 			children = (
+				A3A542442ADAF53E00FCDE68 /* media */,
 				A39FDBE62AD45EEF000452E2 /* lib */,
 				A39FDBE52AD45EC2000452E2 /* src */,
 				A39FDBDC2AD45CA7000452E2 /* Products */,
@@ -113,6 +116,15 @@
 				A39FDBEC2AD45FA3000452E2 /* libsfml-window.2.6.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A3A542442ADAF53E00FCDE68 /* media */ = {
+			isa = PBXGroup;
+			children = (
+				A3A5424A2ADAF8CD00FCDE68 /* font.ttf */,
+				A3A542462ADAF56000FCDE68 /* bird.png */,
+			);
+			path = media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
