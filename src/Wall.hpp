@@ -15,9 +15,8 @@ public:
     sf::RectangleShape top;
     sf::RectangleShape bottom;
     
-    Wall();
+    Wall() {}
     void initWall();
-//    void update();
 };
 
 #endif

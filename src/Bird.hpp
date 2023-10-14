@@ -11,7 +11,7 @@ class Bird : public sf::CircleShape {
     sf::Vector2f vel;
     
 public:
-    Bird();
+    Bird() {}
     void initBird();
     void update();
     void jump();

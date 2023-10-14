@@ -38,6 +38,8 @@ public:
     
     // Accessors.
     const bool isRunning() const;
+    bool isOver;
+    
     
     // Functions.
     void pollEvents();

@@ -17,6 +17,7 @@ int wallCounter = 0;
 
 void Game::initVariables() { 
     this->window = nullptr;
+    this->isOver = false;
 }
 
 void Game::initWindow() {
@@ -63,14 +64,17 @@ const bool Game::isRunning() const {
 
 void Game::collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom) {
     if (bird.getGlobalBounds().intersects(top.getGlobalBounds()) || bird.getGlobalBounds().intersects(bottom.getGlobalBounds())) {
-        std::cout << "Collision" << std::endl;
+        gameOver();
     }
 }
 
 void Game::update() {
     this->pollEvents();
-    this->updateBird();
-    this->updateWalls();
+    
+    if (!isOver) {
+        this->updateBird();
+        this->updateWalls();
+    }
 }
 
 void Game::createWall() {
@@ -88,18 +92,26 @@ void Game::updateBird() {
 
 void Game::gameOver() {
     std::cout << "You're out!" << std::endl;
+    isOver = true;
 }
 
-// Move and create walls. Detect collisions with birds.
+// Move and create walls. Detect collisions with birds. Update score.
 void Game::updateWalls() {
     for (int i = 0; i < this->walls.size(); i++) {
         
         // Create new wall when previous reaches x = 500.
         if (this->walls[wallCounter].top.getPosition().x < 500) {
             this->createWall();
-            std::cout << "Create wall" << std::endl;
             wallCounter += 1;
         }
+        
+        // Update score.
+        if (this->walls[wallCounter-1].top.getPosition().x < win_width/2) {
+            std::cout << "Score = " << wallCounter << std::endl;
+        }
+        
+        // Detect collisions.
+        collision(bird, walls[i].top, walls[i].bottom);
         
         // Move walls right to left.
         this->walls[i].top.move(-2.f, 0.f);

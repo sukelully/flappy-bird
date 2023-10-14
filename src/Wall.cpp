@@ -3,10 +3,6 @@
 const int win_width = 800;
 const int win_height = 600;
 
-Wall::Wall() {
-    
-}
-
 void Wall::initWall() {
     topSize = static_cast<float>( rand() % static_cast<int>(400 - 100 + 1) + 100);
     bottomSize = (win_height - topSize - 200) * -1;
@@ -18,8 +14,3 @@ void Wall::initWall() {
     bottom.setPosition(win_width, win_height);
     bottom.setFillColor(sf::Color::Red);
 }
-
-//void Wall::update() {
-//    top.move(-2, 0);
-//    bottom.move(-2, 0);
-//}
