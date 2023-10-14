@@ -56,10 +56,10 @@ void Game::pollEvents() {
                 if (this->event.key.code == sf::Keyboard::Escape)
                     this->window->close();
                 if (this->event.key.code == sf::Keyboard::Space)
-                    // Spacebar causes bired to jump if game has started.
+                    // Spacebar causes bird to jump after initial press.
                     if (startButton != 0) {
                         bird.jump();
-                    // If the game has not started the spacebar starts the game.
+                    // Initial press starts the game.
                     } else if (startButton == 0) {
                         initGame();
                         startButton++;
@@ -73,6 +73,7 @@ void Game::pollEvents() {
 void Game::update() {
     this->pollEvents();
     
+    // When the bird collides or falls out of bounds, the game ends.
     if (!isOver) {
         this->updateBird();
         this->updateWalls();
@@ -81,7 +82,7 @@ void Game::update() {
 
 // Draw and color game objects.
 void Game::render() {
-    this->window->clear(sf::Color(20, 20, 20));
+    this->window->clear(sf::Color(105, 161, 250));
     
     // Draw game objects.
     this->window->draw(bird);
@@ -110,12 +111,14 @@ void Game::initScore() {
 //    score.setFont(font);
 }
 
+// Initialises bird and first wall, removes start menu.
 void Game::initGame() {
     bird.initBird();
     this->createWall();
     startTile.setFillColor(sf::Color::Transparent);
 }
 
+// Creates start screen to ready player.
 void Game::initStartScreen() {
     startTile.setPosition(100, 100);
     startTile.setSize(sf::Vector2f(600, 400));

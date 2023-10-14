@@ -1,11 +1,8 @@
 #include "Bird.hpp"
 
-const int win_width = 800;
-const int win_height = 600;
-
 // Initialises bird size, color and position.
 void Bird::initBird() {
-    this->setPosition(win_width/2, 100);
+    this->setPosition(400, 100);
     this->setRadius(10);
     this->setFillColor(sf::Color(247, 207, 96));
 }
