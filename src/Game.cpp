@@ -148,10 +148,13 @@ void Game::createWall() {
 
 // Move bird and checks if bird is within the screen window.
 void Game::updateBird() {
-    if (this->bird.getPosition().y > this->window->getSize().y) {
-        this->gameOver();
+    if (startButton != 0) {
+        if (this->bird.getPosition().y > this->window->getSize().y) {
+            this->gameOver();
+            std::cout << "Error?" << std::endl;
+        }
+        bird.update();
     }
-    bird.update();
 }
 
 // Set boolean variable to true to stop game from updating.
