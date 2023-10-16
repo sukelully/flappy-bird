@@ -31,7 +31,7 @@ void Game::initialise() {
     
     // Handle font loading error.
     if (!font.loadFromFile("media/font.ttf")) {
-        std::cerr << "Error loading font" << std::endl;
+        std::cerr << "ERROR: Game::initialise() - Could not load font file." << std::endl;
     }
     
     // Initialise start message text.
@@ -136,7 +136,7 @@ void Game::updateWalls() {
         }
         
         // Detect collisions with bird.
-        collision(bird, walls[i].top, walls[i].bottom);
+        collision(bird.spriteBounds, walls[i].top, walls[i].bottom);
         
         // Move walls right to left.
         walls[i].top.move(wallSpeed, 0.0f);
@@ -157,7 +157,9 @@ void Game::render() {
     window.draw(startTile);
     window.draw(startMessage);
     
+    window.draw(bird.spriteBounds);
     window.draw(bird);
+    
     for (auto &w : walls) {
         window.draw(w.top);
         window.draw(w.bottom);
@@ -174,7 +176,7 @@ void Game::createWall() {
 }
 
 // Centre text position.
-void Game::centreText(sf::Text &text) {
+void Game::centreText(sf::Text& text) {
     sf::FloatRect textRect = text.getLocalBounds();
     text.setOrigin(textRect.left + textRect.width/2.0f,
                    textRect.top  + textRect.height/2.0f);
