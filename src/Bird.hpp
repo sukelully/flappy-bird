@@ -15,6 +15,9 @@ class Bird : public sf::Sprite {
     void initTexture();
     void initSprite();
     
+    template <typename T>
+    void centreObject(T& object);
+    
 public:
     sf::CircleShape spriteBounds;
     

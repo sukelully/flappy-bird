@@ -11,13 +11,19 @@ void Bird::initBird() {
                     birdRect.top + birdRect.height/2.0f);
     
     // Set up sprite bounds.
-//    spriteBounds.setFillColor(sf::Color::White);
+    spriteBounds.setFillColor(sf::Color::Transparent);
     spriteBounds.setRadius(16);
     spriteBounds.setPosition(400, 100);
     sf::FloatRect boundsRect = spriteBounds.getLocalBounds();
     spriteBounds.setOrigin(boundsRect.left + boundsRect.width/2.0f,
                            boundsRect.top + boundsRect.height/2.0f);
+}
 
+template <typename T>
+void CenterObject(T& object) {
+    sf::FloatRect boundsRect = object.getLocalBounds();
+    object.setOrigin(boundsRect.left + boundsRect.width / 2.0f,
+                     boundsRect.top + boundsRect.height / 2.0f);
 }
 
 // Update bird position. Move bird down to simulate gravity.
