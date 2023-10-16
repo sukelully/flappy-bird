@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <sstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -13,6 +14,13 @@
 #include "Wall.hpp"
     
 class Game {
+    // Constants and global variables.
+    const int win_width = 800;
+    const int win_height = 600;
+    int wallCounter = 0;
+    int startButton = 0;
+    float wallSpeed = -2;
+    
     // Window.
     sf::RenderWindow* window;
     sf::VideoMode videoMode;
@@ -46,6 +54,7 @@ class Game {
     void renderWalls();
     void createWall();
     void gameOver();
+    void centreText(sf::Text &text);
     
     // Game logic function.
     void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);

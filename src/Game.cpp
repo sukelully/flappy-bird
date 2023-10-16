@@ -1,21 +1,14 @@
 #include "Game.hpp"
 
-const int win_width = 800;
-const int win_height = 600;
-int wallCounter = 0;
-int startButton = 0;
-float wallSpeed = -2;
-
 /*
  To do:
  - Randomise wall hole size.
  - Score system.
- - Fix start screen "You're out!" bug.
  - Clean up / comment.
  - Add sprites, spruce up color scheme.
  */
 
-// Constructor. Initalise variables and game objects, create initial wall.
+// Constructor. Initalise variables and start message.
 Game::Game() {
     this->initVariables();
     this->initScore();
@@ -26,21 +19,6 @@ Game::Game() {
 // Deconstructor.
 Game::~Game() {
     delete this->window;
-}
-
-// Initialise game variables.
-void Game::initVariables() { 
-    this->window = nullptr;
-    this->isOver = false;
-}
-
-// Initialise game window and set frame rate.
-void Game::initWindow() {
-    this->videoMode.width = win_width;
-    this->videoMode.height = win_height;
-    
-    this->window = new sf::RenderWindow(this->videoMode, "Flappy Bird", sf::Style::Titlebar | sf::Style::Close);
-    this->window->setFramerateLimit(60);
 }
 
 // Handle all events.
@@ -87,29 +65,45 @@ void Game::render() {
     this->window->draw(startTile);
     this->window->draw(startMessage);
     this->window->draw(bird);
-    this->window->draw(score);
     this->renderWalls();
+    this->window->draw(score);
     this->window->display();
 }
 
-// Check if game window is open.
-const bool Game::isRunning() const {
-    return this->window->isOpen();
+// Draw top and bottom wall pieces.
+void Game::renderWalls() {
+    for (auto &w : this->walls) {
+        this->window->draw(w.top);
+        this->window->draw(w.bottom);
+    }
 }
 
-// Detect collisions between bird and walls.
-void Game::collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom) {
-    if (bird.getGlobalBounds().intersects(top.getGlobalBounds()) || bird.getGlobalBounds().intersects(bottom.getGlobalBounds())) {
-        gameOver();
-    }
+// Create a wall section and add it to the walls vector.
+void Game::createWall() {
+    wall.initWall();
+    this->walls.push_back(this->wall);
+}
+
+// Initialise game variables.
+void Game::initVariables() {
+    this->window = nullptr;
+    this->isOver = false;
+}
+
+// Initialise game window and set frame rate.
+void Game::initWindow() {
+    this->videoMode.width = win_width;
+    this->videoMode.height = win_height;
+    
+    this->window = new sf::RenderWindow(this->videoMode, "Flappy Bird", sf::Style::Titlebar | sf::Style::Close);
+    this->window->setFramerateLimit(60);
 }
 
 // Initialise score.
 void Game::initScore() {
     score.setFont(font);
     score.setFillColor(sf::Color::White);
-    score.setString("test");
-    score.setCharacterSize(30);
+    score.setCharacterSize(50);
 }
 
 // Initialises bird and first wall, removes start menu.
@@ -135,15 +129,32 @@ void Game::initStartScreen() {
     // Initialise start screen message.
     startMessage.setFont(font);
     startMessage.setFillColor(sf::Color::White);
-    startMessage.setString("Press spacebar to play");
+    startMessage.setString("Press spacebar to play!");
     startMessage.setCharacterSize(40);
-    startMessage.setPosition(150, 275);
+
+    // Centre text and set position.
+    centreText(startMessage);
+    startMessage.setPosition(400, 300);
 }
 
-// Create a wall section and add it to the walls vector.
-void Game::createWall() {
-    wall.initWall();
-    this->walls.push_back(this->wall);
+// Check if game window is open.
+const bool Game::isRunning() const {
+    return this->window->isOpen();
+}
+
+// Centre text.
+void Game::centreText(sf::Text &text) {
+    sf::FloatRect textRect = text.getLocalBounds();
+    text.setOrigin(textRect.left + textRect.width/2.0f,
+                   textRect.top  + textRect.height/2.0f);
+}
+
+// Detect collisions between bird and walls.
+void Game::collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom) {
+    if (bird.getGlobalBounds().intersects(top.getGlobalBounds()) ||
+        bird.getGlobalBounds().intersects(bottom.getGlobalBounds())) {
+        gameOver();
+    }
 }
 
 // Move bird and checks if bird is within the screen window.
@@ -163,24 +174,21 @@ void Game::gameOver() {
     isOver = true;
 }
 
-// Update score text.
-void Game::updateScore() {
-    std::cout << "Score = " << wallCounter << std::endl;
-}
-
 // Spawn new walls and move them. Detect collisions with birds. Update score.
 void Game::updateWalls() {
     for (int i = 0; i < this->walls.size(); i++) {
         
-        // Create new wall when previous reaches x = 500.
-        if (this->walls[wallCounter].top.getPosition().x < 500) {
+        // Create new wall when previous reaches x = 460.
+        if (this->walls[wallCounter].top.getPosition().x < 460) {
             this->createWall();
             wallCounter += 1;
         }
         
         // Update score.
         if (this->walls[wallCounter-1].top.getPosition().x < win_width/2) {
-            this->updateScore();
+            score.setString(std::to_string(wallCounter));
+            centreText(score);
+            score.setPosition(400, 40);
         }
         
         // Detect collisions.
@@ -198,12 +206,4 @@ void Game::updateWalls() {
     
     // Gradually speed up walls.
     wallSpeed -= 0.001;
-}
-
-// Draw top and bottom wall pieces.
-void Game::renderWalls() {
-    for (auto &w : this->walls) {
-        this->window->draw(w.top);
-        this->window->draw(w.bottom);
-    }
 }
