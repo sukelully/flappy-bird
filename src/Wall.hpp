@@ -7,6 +7,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+const int win_width = 800;
+const int win_height = 600;
+
 class Wall {
     float topSize;
     float bottomSize;

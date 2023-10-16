@@ -9,13 +9,7 @@ int main() {
     Game game;
     
     // Game loop.
-    while (game.isRunning()) {
-        // Update game objects.
-        game.update();
-        
-        // Render game objects.
-        game.render();
-    }
+    game.run();
     
     return 0;
 }

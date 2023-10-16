@@ -1,7 +1,5 @@
 #include "Wall.hpp"
 
-const int win_width = 800;
-const int win_height = 600;
 const int wall_width = 20;
 const sf::Color wall_color = sf::Color(2, 107, 11);
 

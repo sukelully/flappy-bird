@@ -14,63 +14,42 @@
 #include "Wall.hpp"
     
 class Game {
-    // Constants and global variables.
-    const int win_width = 800;
-    const int win_height = 600;
-    int wallCounter = 0;
-    int startButton = 0;
-    float wallSpeed = -2;
+public:
+    Game();
+    ~Game();
+    void run();
     
-    // Window.
-    sf::RenderWindow* window;
-    sf::VideoMode videoMode;
-    sf::Event event;
+    const bool isRunning();
     
-    // Game objects.
+private:
+    // Member variables.
+    sf::RenderWindow window;
     Bird bird;
     Wall wall;
     std::vector<Wall> walls;
-    sf::Text score;
+    
     sf::Font font;
-    sf::RectangleShape startTile;
+    sf::Text score;
     sf::Text startMessage;
+    sf::RectangleShape startTile;
     
-    // Game logic variables.
     bool isOver;
-
-    // Initialisation.
-    void initVariables();
-    void initWindow();
-    void initScore();
-    void initStartScreen();
-    void initGame();
+    bool gameStarted;
+    int wallCounter;
+    float wallSpeed;
     
-    // Updating.
-    void updateScore();
-    void updateWalls();
+    // Private member functions.
+    void initialise();
+    void handleEvents();
+    void update();
     void updateBird();
-    
-    // Rendering.
-    void renderWalls();
+    void updateWalls();
+    void render();
     void createWall();
     void gameOver();
-    void centreText(sf::Text &text);
-    
-    // Game logic function.
+    void startGame();
+    void centreText(sf::Text& text);
     void collision(sf::CircleShape bird, sf::RectangleShape top, sf::RectangleShape bottom);
-    void pollEvents();
-    
-public:
-    // Constructors.
-    Game();
-    virtual ~Game();
-    
-    // Accessors.
-    const bool isRunning() const;
-    
-    // Functions.
-    void update();
-    void render();
 };
 
 #endif
